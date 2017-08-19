@@ -1,0 +1,41 @@
+.mg-top-20{
+    margin-top: 20px;
+}
+.mg-top-30{
+    margin-top: 30px;
+}
+.wrapper{
+    background-color: #404a59;
+    margin: 50px 0px;
+}
+.accssTime{
+    height: 300px;
+}
+.seqChart{
+    height: 600px;
+}
+.barChart{
+    height: 500px;
+}
+.h-title{
+    margin-top: 10px;
+     text-align: center;
+     color: #fff;
+ }
+.p-footer{
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    text-align: center;
+    color: #999;
+    background-color: #fff;
+    font-size: 16px;
+}
+.dateContainer{
+    margin: 10px auto;
+    background-color: #404a59;
+}
+
+.date-warning{
+    color: red;
+}

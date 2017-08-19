@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    strData ="{\"130.6.203.181\":378,\"130.6.202.13\":655,\"130.6.202.54\":407,\"130.6.201.212\":505,\"130.6.202.45\":558,\"130.6.201.171\":341,\"130.6.203.221\":656,\"130.6.202.100\":375,\"130.6.202.32\":470,\"130.6.203.193\":1234}";
+    strData = JSON.parse(strData);
+    let arr=[];
+    for(let p in strData){
+        arr.push([p, strData[p]]);
+    }
+    console.log(arr);
+    </script>
+</body>
+</html>
