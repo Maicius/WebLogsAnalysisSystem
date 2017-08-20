@@ -27,7 +27,7 @@ public class QueryServiceImpl implements QueryService{
         LogAna dataSets = logAnaDao.findById(rowKey);
         //将bytes转为MB
         int totalBytes = Integer.parseInt(dataSets.getToTalBytes());
-        totalBytes = totalBytes / 1024 / 8;
+        totalBytes = totalBytes / 1024 / 1024;
         dataSets.setToTalBytes(String.valueOf(totalBytes));
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(dataSets);
