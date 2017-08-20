@@ -1,7 +1,11 @@
 #基于HBase的网站日志数据分析系统
+  
 ##系统说明
+
 ###1. 数据库设计
+
 ####LogData
+
 - 该表用于存储经数据清洗、转化后的数据
 - 数据库类型： HBase
 - 表结构
@@ -13,11 +17,11 @@
 >  RowKey 分为 日期 + 网站代码后三位 + 六位数ID  
 >  各部分说明如下：   
 
-	字段 |  解释 | 例子
-	 ----| ----- |----
-	 日期 |日志文件的产生日期(纯数字，不含空格和-) | 20170808
-	 公司代码| 公司代码后三位 |200
-	 ID | 从100000开始的六位数字，用于唯一的标明数据并对齐 | 100001 
+ 字段 |  解释 | 例子
+----| ----- |----
+日期 |日志文件的产生日期(纯数字，不含空格和-) | 20170808
+公司代码| 公司代码后三位 |200
+ID | 从100000开始的六位数字，用于唯一的标明数据并对齐 | 100001 
 > 完整例子  
 > 201708082001000000 表示代号为200点公司在2017-08-08产生的一次请求
 	 
@@ -161,6 +165,17 @@
 	> DAO: 解析实体类，并存入到HBase  
 	> Entity： 两个实体类  
 	> util: 各种工具类
+	
+	#### 3. 项目截图：
+	
+	- Hbase数据库截图  
+	![image](https://github.com/Maicius/WebLogsAnalysisSystem/blob/master/image/p2.png)
+	  
+	- 数据展示界面  
+	![image](https://github.com/Maicius/WebLogsAnalysisSystem/blob/master/image/p1.png)  
+	
+	- 数据展示界面  
+	![image](https://github.com/Maicius/WebLogsAnalysisSystem/blob/master/image/p3.png)
 
 	
 
