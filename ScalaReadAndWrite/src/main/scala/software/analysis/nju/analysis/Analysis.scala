@@ -18,7 +18,7 @@ object Analysis {
   def main(args: Array[String]): Unit = {
 
     //获取昨天的日期和法院编号，用于构造正则表达式
-    val yesterday: String = "20170822"
+    val yesterday: String = "20170823"
     val courtList: List[String] = CourtInfo.getCourtMap.values.toList
 
     val sparkConf = new SparkConf().setAppName(SparkProperties.SPARK_APP_NAME).setMaster(SparkProperties.SPARK_MASTER)

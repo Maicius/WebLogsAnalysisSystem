@@ -38,77 +38,85 @@ public class ParseLogsUtil {
             // 每行一条记录  分析记录写入数据库
             //ip
             //				str = br.readLine();
-            iplength = str.indexOf("-");
-            ip = str.substring(0, iplength - 1);
-            //				System.out.println("ip:"+ip);
-            //time
-            timebegin = str.indexOf("[");
-            timeend = str.indexOf("+0800]");
-            date = str.substring(timebegin + 1, timeend - 1);
-            SimpleDateFormat sf = new SimpleDateFormat("dd/MMM/yyyy:hh:mm:ss", Locale.ENGLISH);
-            dates = sf.parse(date);
-            //				System.out.println("date:"+dates);
-            //method
-            str = str.substring(timeend + 8);
-            //				System.out.println(str);
-            methodend = str.indexOf("/");
-            method = str.substring(0, methodend - 1);
-            //				System.out.println(method);
-            urlend = str.indexOf("HTTP/1.1");
-            url = str.substring(methodend + 1, urlend);
-            url = url.trim();
-            if (url.contains("tjspxt")) {
-                if (url.length() == 6) {
+            try {
+                iplength = str.indexOf("-");
+                ip = str.substring(0, iplength - 1);
+                //				System.out.println("ip:"+ip);
+                //time
+                timebegin = str.indexOf("[");
+                timeend = str.indexOf("+0800]");
+                date = str.substring(timebegin + 1, timeend - 1);
+                SimpleDateFormat sf = new SimpleDateFormat("dd/MMM/yyyy:hh:mm:ss", Locale.ENGLISH);
+                dates = sf.parse(date);
+                //				System.out.println("date:"+dates);
+                //method
+                str = str.substring(timeend + 8);
+                //				System.out.println(str);
+                methodend = str.indexOf("/");
+                method = str.substring(0, methodend - 1);
+                System.out.println(method);
+                urlend = str.indexOf("HTTP/1.1");
+                int urlend2 = str.indexOf("HTTP/1.0");
+                int urlend1 = str.indexOf("HTTP/1.1");
+                urlend = urlend2 > urlend1 ? urlend2 : urlend1;
+                url = str.substring(methodend + 1, urlend);
+                url = url.trim();
+                System.out.println(url);
+                if (url.contains("tjspxt")) {
+                    if (url.length() == 6) {
+                        continue;
+                    }
+                    url = url.substring(7);
+                }
+                if (url.contains("jsessionid=")) {
+                    url = url.substring(0, url.indexOf("jsessionid=") - 1);
+                }
+                if (url.contains("resources")) {
+                    //包含资源请求的过滤掉
+                    continue;
+                } else if (url.equals("") || url == "") {
+                    //过滤空白url
+                    url = "login.do";
+                    //					//continue;
+                } else if (url.indexOf("?") > 0) {
+                    url = url.substring(0, url.indexOf("?"));
+                }
+                //过滤部分url
+                if (url.equals("gjShow.aj") || url.equals("getQxtxCount.aj") || url.equals("qnsjajCount.aj")
+                        || url.equals("wjajCount.aj") || url.equals("csxajCount.aj") || url.equals("getLctxCountWithoutIgnored.aj")
+                        || url.equals("favicon.ico") || url.equals("connectDetection.aj")) {
                     continue;
                 }
-                url = url.substring(7);
-            }
-            if (url.contains("jsessionid=")) {
-                url = url.substring(0, url.indexOf("jsessionid=") - 1);
-            }
-            if (url.contains("resources")) {
-                //包含资源请求的过滤掉
-                continue;
-            } else if (url.equals("") || url == "") {
-                //过滤空白url
-                url = "login.do";
-            //					//continue;
-            } else if (url.indexOf("?") > 0) {
-                url = url.substring(0, url.indexOf("?"));
-            }
-            //过滤部分url
-            if (url.equals("gjShow.aj") || url.equals("getQxtxCount.aj") || url.equals("qnsjajCount.aj")
-                    || url.equals("wjajCount.aj") || url.equals("csxajCount.aj") || url.equals("getLctxCountWithoutIgnored.aj")
-                    || url.equals("favicon.ico") || url.equals("connectDetection.aj")) {
-                continue;
-            }
-            //				System.out.println(url);
-            str = str.substring(urlend + 1);
-            statebegin = str.indexOf("HTTP/1.1");
-            str = str.substring(statebegin + 10);
-            //				System.out.println(str);
-            stateend = str.indexOf(" ");
-            state = str.substring(0, stateend);
-            //				System.out.println(state);
-            bytes = str.substring(stateend + 1);
-            //				System.out.println(bytes);
+                //				System.out.println(url);
+                str = str.substring(urlend + 1);
+                statebegin = str.indexOf("HTTP/1.1");
+                str = str.substring(statebegin + 10);
+                //				System.out.println(str);
+                stateend = str.indexOf(" ");
+                state = str.substring(0, stateend);
+                //				System.out.println(state);
+                bytes = str.substring(stateend + 1);
+                //				System.out.println(bytes);
 
-            //再转换为sql.Date对象
-            java.sql.Timestamp d2 = new java.sql.Timestamp(dates.getTime());
+                //再转换为sql.Date对象
+                java.sql.Timestamp d2 = new java.sql.Timestamp(dates.getTime());
 
-            //赋值给logData
-            LogData logData = new LogData();
-            logData.setLogId(getRowKeyPart1(fileName) + id);
-            logData.setFydm(fydm);
-            logData.setState(state);
-            logData.setIp(ip);
-            logData.setURL(url);
-            logData.setBytes(bytes);
-            logData.setMethods(method);
-            logData.setDates(d2.toString());
-            logList.add(logData);
-            //sql = "insert into ACCESSLOG values('"+fydm+"','"+d2+"',"+id+",'"+ip+"','"+method+"','"+url+"','"+state+"','"+bytes+"')";
-            id++;
+                //赋值给logData
+                LogData logData = new LogData();
+                logData.setLogId(getRowKeyPart1(fileName) + id);
+                logData.setFydm(fydm);
+                logData.setState(state);
+                logData.setIp(ip);
+                logData.setURL(url);
+                logData.setBytes(bytes);
+                logData.setMethods(method);
+                logData.setDates(d2.toString());
+                logList.add(logData);
+                //sql = "insert into ACCESSLOG values('"+fydm+"','"+d2+"',"+id+",'"+ip+"','"+method+"','"+url+"','"+state+"','"+bytes+"')";
+                id++;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
         Date d1 = new Date();
         System.out.println(d1);

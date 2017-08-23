@@ -23,7 +23,7 @@ public class QueryServiceImpl implements QueryService{
         String yesterday = DateUtil.getYesterday();
         //000表示一天中所有法院的数据的代码
 //        String rowKey = yesterday + "000";
-        String rowKey = "20170808" + "000";
+        String rowKey = "20170823" + "000";
         LogAna dataSets = logAnaDao.findById(rowKey);
         //将bytes转为MB
         int totalBytes = Integer.parseInt(dataSets.getToTalBytes());

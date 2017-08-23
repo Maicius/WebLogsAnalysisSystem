@@ -14,7 +14,7 @@ public class HbaseBatchInsertTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         LogDataDao logDataDao = (LogDataDao) ac.getBean("logDataDao");
         System.out.println("begin to parse....");
-        List<LogData> list = ParseLogsUtil.parseLogsUtil("/Users/maicius/RestoreData/src/main/resources/200_localhost_access_log.2017-08-08.txt");
+        List<LogData> list = ParseLogsUtil.parseLogsUtil("/Users/maicius/code/WebLogsAnalysisSystem/RestoreData/src/main/resources/200_localhost_access_log.2017-08-23.txt");
         System.out.println("parse end...\nbegin to insert");
         Date a = new Date();
         logDataDao.saveBatch(list);
