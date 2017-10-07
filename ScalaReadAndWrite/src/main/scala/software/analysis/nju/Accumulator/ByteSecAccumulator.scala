@@ -25,6 +25,7 @@ class ByteSecAccumulator  extends AccumulatorV2[(String, Long), mutable.Map[Stri
   }
 
   override def add(v: (String, Long)): Unit = {
+    print("byteSec" + v)
     val sec = v._1.slice(0, 19)
     if(BytesSecMap.contains(sec)){
       BytesSecMap.update(sec, BytesSecMap(sec) + v._2)

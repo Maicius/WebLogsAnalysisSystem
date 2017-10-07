@@ -18,42 +18,42 @@ $(document).ready(function () {
         let dateBegin = $("#calendarBegin").val();
         //构造Json格式的数据
         let jsonData = "{\"dateBegin\":" + "\""+dateBegin +"\""  +  ",\"courtList\":" + JSON.stringify(courtData) + "}";
-        $.ajax({
-            url: "/conditionQuery.action",
-            type:"post",
-            dataType: "json",
-            data: jsonData,
-            success: function(data){
-                console.log("success");
-                drawNumChart(accessChart, data.ReqSum, "总访问次数(/次)");
-                drawNumChart(totalFlow, data.TotalBytes, "总流量(/MB)");
-                drawNumChart(totalIP, data.iptotalNum, "IP总数");
-                let IPList = convertJsonToArray(data.IPList);
-                let URLList = convertJsonToArray(data.URLList);
-                state= convertJsonToArray(data.stateList);
-                method = convertJsonToArray(data.methodList);
-                console.log("IPlist:" + IPList.length);
-                drawRankChart(IPRank, IPList, "IP访问排行", color1);
-                drawRankChart(URLRank, URLList, "URL访问排行", color2);
-                let methodName = method.map(function (methodItem) {
-                    return methodItem[0];
-                });
-                let methodData = method.map(function (methodDataItem) {
-                    return {name: methodDataItem[0], value: methodDataItem[1]}
-                });
-                let stateName = state.map(function (methodItem) {
-                    return methodItem[0];
-                });
-                let stateData = state.map(function (methodDataItem) {
-                    return {name: methodDataItem[0], value: methodDataItem[1]}
-                });
-                drawPieChart(PieChart,methodName,  methodData, stateName, stateData);
-
-                let BytesSec = convertJsonToArray(data.BytesSecList);
-                let ReqSec = convertJsonToArray(data.ReqSecList);
-                drawSeqChart(SeqChart, BytesSec, ReqSec);
-            }
-        });
+    //     $.ajax({
+    //         url: "/conditionQuery.action",
+    //         type:"post",
+    //         dataType: "json",
+    //         data: jsonData,
+    //         success: function(data){
+    //             console.log("success");
+    //             drawNumChart(accessChart, data.ReqSum, "总访问次数(/次)");
+    //             drawNumChart(totalFlow, data.TotalBytes, "总流量(/MB)");
+    //             drawNumChart(totalIP, data.iptotalNum, "IP总数");
+    //             let IPList = convertJsonToArray(data.IPList);
+    //             let URLList = convertJsonToArray(data.URLList);
+    //             state= convertJsonToArray(data.stateList);
+    //             method = convertJsonToArray(data.methodList);
+    //             console.log("IPlist:" + IPList.length);
+    //             drawRankChart(IPRank, IPList, "IP访问排行", color1);
+    //             drawRankChart(URLRank, URLList, "URL访问排行", color2);
+    //             let methodName = method.map(function (methodItem) {
+    //                 return methodItem[0];
+    //             });
+    //             let methodData = method.map(function (methodDataItem) {
+    //                 return {name: methodDataItem[0], value: methodDataItem[1]}
+    //             });
+    //             let stateName = state.map(function (methodItem) {
+    //                 return methodItem[0];
+    //             });
+    //             let stateData = state.map(function (methodDataItem) {
+    //                 return {name: methodDataItem[0], value: methodDataItem[1]}
+    //             });
+    //             drawPieChart(PieChart,methodName,  methodData, stateName, stateData);
+    //
+    //             let BytesSec = convertJsonToArray(data.BytesSecList);
+    //             let ReqSec = convertJsonToArray(data.ReqSecList);
+    //             drawSeqChart(SeqChart, BytesSec, ReqSec);
+    //         }
+    //     });
     });
     let timeData = [ '2009/6/12 2:00', '2009/6/12 3:00'];
     timeData = timeData.map(function (str) {

@@ -97,8 +97,8 @@ object AnalysisByCourt extends Serializable {
       * 此处存在疑问，如果用mutable.map而不用List，属性的值无法在外面获取
       */
     val dateResult2 = CourtResult(rowKey, count, ipSumVal, ipTotalNum, ipRankList,
-                                              requestHourMap.value.toList, requestSecMap.value.toList, totalBytes,
-                                              ByteMap.value.toList, ByteSecMap.value.toList, maxURL,
+                                              requestHourMap.value.toList, requestSecMap.value.toList.take(200), totalBytes,
+                                              ByteMap.value.toList, ByteSecMap.value.toList.take(200), maxURL,
                                               URLRankList, methodMap.value.toList, StateMap.value.toList)
 
     finalMap.add(dateResult)

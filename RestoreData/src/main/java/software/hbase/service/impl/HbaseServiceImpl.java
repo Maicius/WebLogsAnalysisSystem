@@ -59,12 +59,11 @@ public class HbaseServiceImpl implements HBaseService, InitializingBean,Disposab
 
     public void showTables() throws Exception{
         // Instantiating table descriptor class
-        //createConnect();
-        //afterPropertiesSet();
         HTableDescriptor[] tableDescriptor =admin.listTables();
-
+        System.out.println("success to create descriptor");
         // printing all the table names.
         for (int i=0; i<tableDescriptor.length;i++ ){
+            System.out.println(i);
             System.out.println(tableDescriptor[i].getNameAsString());
         }
 

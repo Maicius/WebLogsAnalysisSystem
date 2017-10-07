@@ -10,11 +10,11 @@ public class HbaseConnectionTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         HBaseService hbaseService = (HBaseService) ac.getBean("HBaseService");
         try {
+            System.out.println("show tables");
             hbaseService.showTables();
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
 }

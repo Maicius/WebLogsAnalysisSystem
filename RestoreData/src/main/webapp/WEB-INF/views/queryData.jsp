@@ -164,7 +164,7 @@
     </div>
     <footer class="footer navbar-fixed-bottom ">
         <div class="p-footer">
-            <p>@copyright</p>
+            <p>天津市高级人民法院@copyright</p>
         </div>
     </footer>
 </div>

@@ -12,6 +12,6 @@ object CourtInfo {
                                   "津南区法院" -> "227", "西青区法院" -> "215", "北辰区法院" -> "216",
                                   "武清区法院" -> "217", "宝坻区法院" -> "219", "静海区法院" -> "218",
                                   "宁河县法院" -> "228", "蓟县法院" -> "21A", "铁路法院" -> "132")
-
-  def getCourtMap: Map[String, String] = courtMap
+private val courtMap2 = Map("市高级法院" -> "200")
+  def getCourtMap: Map[String, String] = courtMap2
 }

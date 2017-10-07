@@ -51,7 +51,7 @@ public class ParseLogsUtil {
                 //				System.out.println("date:"+dates);
                 //method
                 str = str.substring(timeend + 8);
-                //				System.out.println(str);
+                				System.out.println(str);
                 methodend = str.indexOf("/");
                 method = str.substring(0, methodend - 1);
                 System.out.println(method);

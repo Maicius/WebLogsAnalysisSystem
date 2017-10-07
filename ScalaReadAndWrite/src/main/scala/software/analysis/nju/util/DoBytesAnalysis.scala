@@ -26,7 +26,9 @@ object DoBytesAnalysis {
     tmp
   }
   def changeToLong(x: String): Long = {
+    println(x)
     x match {
+      case null => 0L
       case "-" => 0L
       case _ => x.toLong
     }
